@@ -9,15 +9,16 @@
         <div class="col-6">
             {!! Form::model($task, ['route' => 'tasks.store']) !!}
             
+                            <div class="form-group">
+                    {!! Form::label('status', '状態:') !!}
+                    {!! Form::text('status', null, ['class' => 'form-control']) !!}
+                </div>
+            
                 <div class="form-group">
                     {!! Form::label('content','タスク') !!}
                     {!! Form::text('content',null, ['class' => 'form-contorl']) !!}
                     
-                        <div class="form-group">
-                            {!! Form::label('content', 'メッセージ:') !!}
-                            {!! Form::text('content',null,['class' => 'form-contorl']) !!}
-                            
-                        </div>
+                
                         
                         
                         {!! Form::submit('投稿',['class' => 'btn btn-primary']) !!}
