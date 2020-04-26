@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
+
 {
     /*
     |--------------------------------------------------------------------------
@@ -19,8 +20,6 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
-    use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -38,6 +37,13 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+    
+    
+        public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
+
 
     /**
      * Get a validator for an incoming registration request.
