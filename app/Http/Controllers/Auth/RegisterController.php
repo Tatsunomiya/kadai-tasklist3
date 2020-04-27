@@ -6,6 +6,12 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
+
+
+
 
 class RegisterController extends Controller
 
@@ -43,7 +49,29 @@ class RegisterController extends Controller
     {
         return view('auth.register');
     }
+    
+     public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
 
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
+    }
+
+
+    protected function guard()
+    {
+        return Auth::guard();
+    }
+    
+        protected function registered(Request $request, $user)
+    {
+        //
+    }
 
     /**
      * Get a validator for an incoming registration request.

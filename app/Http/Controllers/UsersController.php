@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\User;
 
+use App\Task;
+
 class UsersController extends Controller
 {
     
@@ -19,13 +21,25 @@ class UsersController extends Controller
         ]);
     }
     
-    public function show($id) {
+    public function show($id)
+    {
+
+
+
+        $task = Task::find($id);
+                if (\Auth::id() === $task->user_id) {
+
         
-        $user = User::find($id);
+
+        return view('tasks.show', ['task' => $task,]);
         
-        return view('users.show', ['user' =>$user,
-        ]);
+                }
+                
+                        return redirect('/');
+
+
     }
+
     
     
 }

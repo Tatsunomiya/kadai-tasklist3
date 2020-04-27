@@ -1,26 +1,46 @@
+
+
+
 @extends('layouts.app')
 
-
 @section('content')
-    <div class="row">
-        <aside class="col-sm-4">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title"> {{$user->name}}</h3>
-            </div>
-            <div class="card-body">
-                <img class="rounded img-fluid" src="{{ Gravatar::src($user->email,500) }}" alt="">
-            </div>
-        </aside>
-        
-        
-        <div class="col-sm-8">
-            <ul class="nav nav-tabs nav-justified mb-3">
-                <li class="nav-item"><a href="#" class="nav-link">TimeLine</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Following</a></li>
-                <li class="nav-item"><a href="#" class="now-link">Followers</a></li>
-            </ul>
-        </div>
-    </div>
+
+    <h1> id ={{$tasks->id}}のメッセージ詳細ページ</h1>
     
+    <table class="table table-bordered">
+        <tr>
+            <th>id</th>
+            <td>{{$tasks->id}}</td>
+        </tr>
+        
+                <tr>
+            <th>タスク</th>
+            <td>{{$tasks->status}}</td>
+        </tr>
+        
+        
+        <tr>
+            <th>メッセージ</th>
+            <td>{{$tasks->content}}</td>
+            
+        </tr>
+        
+    </table>
+    
+    
+    {!! link_to_route('tasks.edit', 'このメッセージを編集', ['id' => $tasks->id],['class' => 'btn btn-light']) !!}
+    {!! Form::model($tasks,['route' => ['tasks.destroy', $tasks->id], 'method' => 'delete']) !!}
+
+        {!! Form::submit('削除', ['class' =>'btn btn-danger']) !!}
+    {!! Form::close() !!}
+    
+    
+    
+    
+
+
+
+
+
+
 @endsection

@@ -42,7 +42,9 @@
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li class="dropdown-item">{!! link_to_route('users.show', 'My profile', ['id' => Auth::id()]) !!}</li>
-                            <li class="nav-item">{!! link_to_route('tasks.create','新規タスクの投稿', [],['class' => 'nav-link']) !!}</li>
+                            <!--<li class="dropdown-item">{!! link_to_route('tasks.create','新規タスクの投稿', [],['class' => 'nav-link']) !!}</li>-->
+                            <li class="dropdown-item">{!! link_to_route('tasks.create','新規タスクの投稿') !!}</li>
+
 
                             <li class="dropdown-divider"></li>
 
