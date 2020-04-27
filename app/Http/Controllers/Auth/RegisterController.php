@@ -10,11 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 
-
-
-
 class RegisterController extends Controller
-
 {
     /*
     |--------------------------------------------------------------------------
@@ -26,6 +22,8 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
+
+    use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -42,35 +40,6 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-    }
-    
-    
-        public function showRegistrationForm()
-    {
-        return view('auth.register');
-    }
-    
-     public function register(Request $request)
-    {
-        $this->validator($request->all())->validate();
-
-        event(new Registered($user = $this->create($request->all())));
-
-        $this->guard()->login($user);
-
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
-    }
-
-
-    protected function guard()
-    {
-        return Auth::guard();
-    }
-    
-        protected function registered(Request $request, $user)
-    {
-        //
     }
 
     /**
